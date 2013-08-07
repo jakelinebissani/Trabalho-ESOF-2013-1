@@ -14,7 +14,8 @@ public class InitialConfDAO {
     public static void configure (Connection dbconn) {
         
         String disciplina = "CREATE TABLE disciplina ( " + 
-                                "sigla CHAR(20) PRIMARY KEY NOT NULL"+
+                                "id CHAR(20) PRIMARY KEY NOT NULL,"+
+                                "nome CHAR(50)"+
                             ")";
         
         try {
