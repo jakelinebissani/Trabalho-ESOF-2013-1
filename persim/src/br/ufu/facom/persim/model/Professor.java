@@ -1,6 +1,6 @@
 package br.ufu.facom.persim.model;
 
-class Professor {
+public class Professor {
     
     private String nome;
     private String email;
