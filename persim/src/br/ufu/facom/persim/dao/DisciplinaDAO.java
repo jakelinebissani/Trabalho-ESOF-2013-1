@@ -6,30 +6,46 @@ import java.sql.SQLException;
 
 public class DisciplinaDAO {
     
-    public static void save (Disciplina disc, ConnectionSQLiteDAO conn) throws SQLException{
-        String query = "INSERT INTO disciplina VALUES (?, ?)";
+    public void save (Disciplina disc, ConnectionSQLiteDAO conn) throws SQLException{
+        String query = "INSERT INTO disciplina VALUES (?, ?, ?, ?);";
         PreparedStatement ps = conn.getDBConnection().prepareStatement(query);
         ps.setString(1, disc.getID());
         ps.setString(2, disc.getNome());
+        try{
+            ProfessorDAO dao = new ProfessorDAO();
+            dao.save(disc.getProfessor(), conn);
+            ps.setString(3, disc.getProfessor().getNome());
+        } catch (SQLException e) {
+            ps.setString(3, disc.getProfessor().getNome());
+        } catch (NullPointerException e) {
+            ps.setNull(3, java.sql.Types.NULL);
+        }
+        ps.setString(4, disc.getAdicionais());
         ps.execute();
-        conn.closeDB();
     }
     
-    public static Disciplina load (String ID, ConnectionSQLiteDAO conn) throws SQLException{
+    public Disciplina load (String ID, ConnectionSQLiteDAO conn) throws SQLException{
         
-        String query = "SELECT * FROM disciplina WHERE id LIKE ?";
+        String query = "SELECT * FROM disciplina LEFT OUTER JOIN professor "
+                            + "ON disciplina.fk_prof_nome LIKE professor.prof_nome "
+                            + "WHERE disciplina.disc_id LIKE ?";
+        
         PreparedStatement ps = conn.getDBConnection().prepareStatement(query);
         ps.setString(1, ID);
         ResultSet rs = ps.executeQuery();
-        Disciplina dc = build(rs);
-        conn.closeDB();
-        return dc;
+        rs.next();
+        return build(rs);
     }
     
-    private static Disciplina build (ResultSet rs) throws SQLException{
-        rs.next();
-        String ID = rs.getString("id");
-        String nome = rs.getString("nome");
-        return new Disciplina(ID, nome);
+    private Disciplina build (ResultSet rs) throws SQLException{
+        Disciplina ds = new Disciplina();
+        ProfessorDAO dao = new ProfessorDAO();
+        
+        ds.setID(rs.getString("disc_id"));
+        ds.setNome(rs.getString("disc_nome"));
+        ds.setProfessor(dao.build(rs));
+        ds.setAdicionais(rs.getString("disc_adicionais"));
+        
+        return ds;
     }
 }
