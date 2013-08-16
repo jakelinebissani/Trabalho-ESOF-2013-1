@@ -7,6 +7,7 @@ Infos:
 
 - Script de inicialização do banco e o banco ficam na pasta database.
 - No script de inicialização não se deve colocar comentarios.
+- Para os diagrama foi utilizado a ferramenta CASE: "dia-gnome 0.97.2"
 
 Tutorial SQLite:
 
