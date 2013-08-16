@@ -5,7 +5,15 @@ public class Professor {
     private String nome;
     private String email;
     private String sala;
-
+    
+    public Professor () {};
+    
+    public Professor (String nome, String email, String sala){
+        this.nome = nome;
+        this.email = email;
+        this.sala = sala;
+    }
+    
     public String getNome() {
         return nome;
     }
