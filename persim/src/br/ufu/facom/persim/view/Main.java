@@ -2,6 +2,7 @@ package br.ufu.facom.persim.view;
 
 import br.ufu.facom.persim.control.DisciplinaControl;
 import br.ufu.facom.persim.model.Disciplina;
+import br.ufu.facom.persim.view.CadastroDisciplina;
 
 public class Main {
 
@@ -13,5 +14,7 @@ public class Main {
         
         System.out.println("TESTES!!");
         System.out.println("* "+dc2.getID()+" - "+dc2.getNome());
+        CadastroDisciplina cadastro = new CadastroDisciplina();
+        cadastro.show();
     }
 }
