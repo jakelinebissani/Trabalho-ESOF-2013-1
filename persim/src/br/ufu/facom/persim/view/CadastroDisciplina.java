@@ -7,9 +7,13 @@ package br.ufu.facom.persim.view;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerDateModel;
+import javax.xml.crypto.Data;
 
 /**
  *
@@ -65,6 +69,9 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         remveLivro = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
+        Date date = new Date();
+        SpinnerDateModel sm = new SpinnerDateModel(date,null,null,Calendar.HOUR_OF_DAY);
+        jSpinner1 = new javax.swing.JSpinner(sm);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(370, 650));
@@ -97,6 +104,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        horarioAula.setText("");
 
         addDiaHora.setText("Adicionar Dia/HoraAula");
         addDiaHora.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -168,6 +176,8 @@ public class CadastroDisciplina extends javax.swing.JFrame {
 
         btSalvar.setText("Salvar");
 
+        jSpinner1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,7 +219,9 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                                         .addComponent(horarioAula, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(remvDiaHora))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(remvDiaHora)
+                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(68, 68, 68)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,9 +245,9 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                                 .addComponent(addLivro)
                                 .addGap(24, 24, 24)
                                 .addComponent(remveLivro)))
-                        .addGap(0, 42, Short.MAX_VALUE))
+                        .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 196, Short.MAX_VALUE)
                         .addComponent(btSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btCancelar)))
@@ -265,7 +277,9 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(horarioAula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addDiaHora)
                     .addComponent(remvDiaHora))
@@ -291,7 +305,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                     .addComponent(remveLivro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancelar)
                     .addComponent(btSalvar))
@@ -310,11 +324,12 @@ public class CadastroDisciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_salaAulaActionPerformed
 
     private void addDiaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDiaHoraActionPerformed
-        dia = diaSemana.getSelectedItem().toString();
-        horaAula = horarioAula.getText().toString();
-        //System.out.println("Dia "+dia+", hora/aula: "+horaAula+"!!");
-        preencher_tabela(dia,horaAula);
-        limpaDiaHora();
+            dia = diaSemana.getSelectedItem().toString();
+            horaAula = horarioAula.getText().toString();            
+            //System.out.println("Dia "+dia+", hora/aula: "+horaAula+"!!");
+            System.out.println("Hora "+horaAula+"!!");           
+            preencher_tabela(dia,horaAula);
+            limpaDiaHora();
     }//GEN-LAST:event_addDiaHoraActionPerformed
 
     private void remvDiaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remvDiaHoraActionPerformed
@@ -351,6 +366,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         diaSemana.addItem("Quinta");
         diaSemana.addItem("Sexta");
         diaSemana.addItem("Sabado");
+        
         //edtNumDept.addItem(result.getString("numero").toString());            
     }
     
@@ -436,6 +452,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField livro;
     private javax.swing.JTextField nomeDisciplina;
     private javax.swing.JTextField nomeProfessor;
