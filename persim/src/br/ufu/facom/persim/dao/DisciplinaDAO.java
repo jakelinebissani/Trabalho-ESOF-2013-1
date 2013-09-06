@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DisciplinaDAO {
     
     public static void save (Disciplina disc, ConnectionSQLiteDAO conn) throws SQLException{
-        String query = "INSERT INTO disciplina VALUES (?, ?)";
+        String query = "INSERT INTO disciplina VALUES (?, ?);";
         PreparedStatement ps = conn.getDBConnection().prepareStatement(query);
         ps.setString(1, disc.getID());
         ps.setString(2, disc.getNome());
