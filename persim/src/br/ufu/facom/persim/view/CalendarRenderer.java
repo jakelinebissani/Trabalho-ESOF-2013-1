@@ -1,4 +1,4 @@
-package br.ufu.facom.persim.control;
+package br.ufu.facom.persim.view;
 
 import com.javaswingcomponents.calendar.JSCCalendar;
 import com.javaswingcomponents.calendar.cellrenderers.CalendarCellRenderer;

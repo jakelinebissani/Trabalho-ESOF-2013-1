@@ -1,6 +1,5 @@
 package br.ufu.facom.persim.view;
 
-import br.ufu.facom.persim.control.CalendarRenderer;
 import com.javaswingcomponents.calendar.JSCCalendar;
 import com.javaswingcomponents.calendar.plaf.darksteel.DarkSteelCalendarUI;
 import com.javaswingcomponents.calendar.plaf.darksteel.DarkSteelCellPanel;
@@ -12,7 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Locale;
 import java.util.TimeZone;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 
 public final class MainWindowFrame extends javax.swing.JFrame {
     
@@ -29,6 +28,11 @@ public final class MainWindowFrame extends javax.swing.JFrame {
         Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();  
         setSize(tela.width, tela.height); 
         this.setVisible(true);
+        
+        /*int answer = JOptionPane.showConfirmDialog(this, "Não há períodos cadastrados! Antes de começar "
+                + "você deve cadastrar um novo período", 
+                "Cadastre um novo período", JOptionPane.INFORMATION_MESSAGE , 
+                JOptionPane.NO_OPTION);*/
     }
     
     private void createCalendar(){
@@ -56,11 +60,7 @@ public final class MainWindowFrame extends javax.swing.JFrame {
         this.cal.setEnabled(false);
         this.periodosAnterioresMenu.setEnabled(false);
         this.periodosVigentesMenu.setEnabled(false);
-        this.calendarioInternalFrame.setIconifiable(true);
-        JOptionPane.showConfirmDialog(this, "Não há períodos cadastrados! Antes de começar "
-                + "você deve cadastrar um novo período", 
-                "Cadastre um novo período", JOptionPane.INFORMATION_MESSAGE , 
-                JOptionPane.OK_CANCEL_OPTION);
+        this.calendarioInternalFrame.setIconifiable(true);        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
